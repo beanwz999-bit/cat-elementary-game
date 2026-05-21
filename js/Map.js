@@ -107,15 +107,34 @@ export const MapEngine = {
       this.keys[e.key] = false;
     });
     
-    this.canvas.addEventListener("mousedown", (e) => {
+    this.handleCanvasInput = (clickX, clickY) => {
       if (this.isModalOpen()) return;
 
-      const rect = this.canvas.getBoundingClientRect();
-      const clickX = (e.clientX - rect.left) * (this.width / rect.width) + (this.currentView === "hallway" ? this.cameraX : 0);
-      const clickY = (e.clientY - rect.top) * (this.height / rect.height);
-      
       const minY = 260;
       const maxY = 450;
+
+      // Check if user tapped/clicked directly on a nearby NPC cat to talk
+      let npcClicked = null;
+      if (this.npcs) {
+        this.npcs.forEach(npc => {
+          const isCurrent = (this.currentView === "hallway" && npc.room === "hallway") || 
+                            (this.currentView === "classroom" && npc.room === "classroom" && npc.grade === this.currentGradeIdx);
+          if (isCurrent) {
+            const clickDistToNpc = Math.hypot(clickX - npc.x, clickY - npc.y);
+            if (clickDistToNpc < 35) {
+              npcClicked = npc;
+            }
+          }
+        });
+      }
+
+      if (npcClicked) {
+        const distToPlayer = Math.hypot(this.playerX - npcClicked.x, this.playerY - npcClicked.y);
+        if (distToPlayer < 65) {
+          this.triggerNPCSpeechBubble(npcClicked);
+          return; // Skip setting moveTarget so we don't start walking
+        }
+      }
       
       this.moveTarget = {
         x: Math.max(20, Math.min(this.currentView === "hallway" ? 1580 : 780, clickX)),
@@ -128,7 +147,25 @@ export const MapEngine = {
           this.interactWithHotspot();
         }
       }
+    };
+
+    this.canvas.addEventListener("mousedown", (e) => {
+      const rect = this.canvas.getBoundingClientRect();
+      const clickX = (e.clientX - rect.left) * (this.width / rect.width) + (this.currentView === "hallway" ? this.cameraX : 0);
+      const clickY = (e.clientY - rect.top) * (this.height / rect.height);
+      this.handleCanvasInput(clickX, clickY);
     });
+
+    this.canvas.addEventListener("touchstart", (e) => {
+      if (e.touches && e.touches.length > 0) {
+        e.preventDefault(); // Prevent scrolling/zooming when tapping the game
+        const touch = e.touches[0];
+        const rect = this.canvas.getBoundingClientRect();
+        const clickX = (touch.clientX - rect.left) * (this.width / rect.width) + (this.currentView === "hallway" ? this.cameraX : 0);
+        const clickY = (touch.clientY - rect.top) * (this.height / rect.height);
+        this.handleCanvasInput(clickX, clickY);
+      }
+    }, { passive: false });
     
     this.setupClassroomHotspots(0);
     this.initNPCs();

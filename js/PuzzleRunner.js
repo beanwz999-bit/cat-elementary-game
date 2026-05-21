@@ -133,9 +133,7 @@ export const PuzzleRunner = {
       optionsContainer.appendChild(input);
 
       // Auto-focus the input
-      setTimeout(() => {
-        input.focus();
-      }, 50);
+      input.focus();
 
       // Case-insensitive typing validation
       input.addEventListener("input", (e) => {
