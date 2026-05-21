@@ -611,7 +611,8 @@ body, html {
   left: 50%;
   transform: translateX(-50%);
   z-index: 100;
-  pointer-events: none;
+  pointer-events: auto;
+  cursor: pointer;
   animation: bounce 1.5s infinite;
 }
 
