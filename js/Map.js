@@ -550,7 +550,7 @@ export const MapEngine = {
       const bubble = prompt.querySelector(".interact-bubble");
       if (this.activeHotspot.type === "door") {
         if (this.activeHotspot.unlocked) {
-          bubble.innerHTML = `Press <span class="interact-key">Space</span> to enter ${this.activeHotspot.name}`;
+          bubble.innerHTML = `Press <span class="interact-key">Space</span> or <span class="interact-click">Tap</span> to enter ${this.activeHotspot.name}`;
         } else {
           bubble.innerHTML = `🔒 ${this.activeHotspot.name} is Locked! Pass previous grades first.`;
         }
@@ -562,10 +562,10 @@ export const MapEngine = {
         } else {
           const isSolved = this.game.isPuzzleCompleted(this.currentGradeIdx, this.activeHotspot.id);
           const solvedTag = isSolved ? "✅ Replay" : "⭐ Play";
-          bubble.innerHTML = `Press <span class="interact-key">Space</span> to play ${this.activeHotspot.name} ${solvedTag}`;
+          bubble.innerHTML = `Press <span class="interact-key">Space</span> or <span class="interact-click">Tap</span> to play ${this.activeHotspot.name} ${solvedTag}`;
         }
       } else if (this.activeHotspot.type === "exit") {
-        bubble.innerHTML = `Press <span class="interact-key">Space</span> to go out to the Hallway`;
+        bubble.innerHTML = `Press <span class="interact-key">Space</span> or <span class="interact-click">Tap</span> to go out to the Hallway`;
       }
     } else {
       prompt.classList.add("hidden");
