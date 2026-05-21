@@ -140,18 +140,7 @@ export const MapEngine = {
         x: Math.max(20, Math.min(this.currentView === "hallway" ? 1580 : 780, clickX)),
         y: Math.max(minY, Math.min(maxY, clickY))
       };
-      
-      if (this.activeHotspot) {
-        const distToPlayer = Math.hypot(this.playerX - this.activeHotspot.x, this.playerY - this.activeHotspot.y);
-        const distToClick = Math.hypot(clickX - this.activeHotspot.x, clickY - this.activeHotspot.y);
-        // Only open the minigame if the player is within range AND they tapped directly on the active hotspot desk/door (within 75px)
-        if (distToPlayer < 75 && distToClick < 75) {
-          this.interactWithHotspot();
-          return; // Skip setting moveTarget so they don't start walking
-        }
-      }
-
-      // If they tapped far away from the active desk/door, set the move target so they walk away
+      // Set the move target so they walk to where they tapped
       this.moveTarget = potentialMoveTarget;
     };
 
