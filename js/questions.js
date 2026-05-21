@@ -34,19 +34,19 @@ export const QUESTIONS = {
       { text: "What color do you get when you mix Red paint and Yellow paint?", options: ["Green", "Orange", "Purple", "Pink"], correct: "Orange", visualType: "colors", visualData: { color1: "#ff3333", color2: "#ffff33" } },
       { text: "What color do you get when you mix Blue paint and Yellow paint?", options: ["Green", "Purple", "Orange", "Brown"], correct: "Green", visualType: "colors", visualData: { color1: "#3333ff", color2: "#ffff33" } },
       { text: "What color do you get when you mix Red paint and Blue paint?", options: ["Green", "Orange", "Purple", "Black"], correct: "Purple", visualType: "colors", visualData: { color1: "#ff3333", color2: "#3333ff" } },
-      { text: "What color is a green leaf on a tree?", options: ["Blue", "Yellow", "Red", "Green"], correct: "Green", visualType: "colors", visualData: { color1: "#2ecc71", color2: "#2ecc71" } },
+      { text: "What color is a leaf on a tree in summer?", options: ["Blue", "Yellow", "Red", "Green"], correct: "Green", visualType: "colors", visualData: { color1: "#2ecc71", color2: "#2ecc71" } },
       { text: "What color is the bright sky on a sunny day?", options: ["Purple", "Green", "Blue", "Black"], correct: "Blue", visualType: "colors", visualData: { color1: "#3498db", color2: "#3498db" } },
-      { text: "What color is a ripe red strawberry?", options: ["Red", "Orange", "Green", "Blue"], correct: "Red", visualType: "colors", visualData: { color1: "#e74c3c", color2: "#e74c3c" } },
+      { text: "What color is a ripe strawberry?", options: ["Red", "Orange", "Green", "Blue"], correct: "Red", visualType: "colors", visualData: { color1: "#e74c3c", color2: "#e74c3c" } },
       { text: "What color is a grape?", options: ["Yellow", "Orange", "Purple", "Blue"], correct: "Purple", visualType: "colors", visualData: { color1: "#8e44ad", color2: "#8e44ad" } },
       { text: "What color is a carrot?", options: ["Yellow", "Orange", "Red", "Pink"], correct: "Orange", visualType: "colors", visualData: { color1: "#e67e22", color2: "#e67e22" } },
-      { text: "What color is fresh white snow?", options: ["Grey", "White", "Blue", "Yellow"], correct: "White", visualType: "colors", visualData: { color1: "#ffffff", color2: "#ffffff" } },
-      { text: "What color is a pink flamingo?", options: ["Red", "Green", "Pink", "Blue"], correct: "Pink", visualType: "colors", visualData: { color1: "#fd79a8", color2: "#fd79a8" } }
+      { text: "What color is fresh snow?", options: ["Grey", "White", "Blue", "Yellow"], correct: "White", visualType: "colors", visualData: { color1: "#ffffff", color2: "#ffffff" } },
+      { text: "What color is a flamingo?", options: ["Red", "Green", "Pink", "Blue"], correct: "Pink", visualType: "colors", visualData: { color1: "#fd79a8", color2: "#fd79a8" } }
     ],
     test: [
       { text: "What shape is a donut?", options: ["Square", "Triangle", "Circle", "Rectangle"], correct: "Circle", visualType: "textOnly" },
       { text: "Count these fish:", options: ["2", "4", "6", "8"], correct: "4", visualType: "fish", visualData: { count: 4 } },
       { text: "Which small letter matches the big letter 'T'?", options: ["f", "l", "t", "i"], correct: "t", visualType: "letters", visualData: { big: "T" } },
-      { text: "What color is a yellow banana?", options: ["Red", "Blue", "Green", "Yellow"], correct: "Yellow", visualType: "colors", visualData: { color1: "#f1c40f", color2: "#f1c40f" } },
+      { text: "What color is a ripe banana?", options: ["Red", "Blue", "Green", "Yellow"], correct: "Yellow", visualType: "colors", visualData: { color1: "#f1c40f", color2: "#f1c40f" } },
       { text: "How many fish are swimming here?", options: ["2", "3", "4", "5"], correct: "2", visualType: "fish", visualData: { count: 2 } },
       { text: "Which small letter matches the big letter 'E'?", options: ["c", "e", "o", "a"], correct: "e", visualType: "letters", visualData: { big: "E" } },
       { text: "What color do you get when you mix Red and Yellow?", options: ["Orange", "Green", "Purple", "Pink"], correct: "Orange", visualType: "colors", visualData: { color1: "#ff3333", color2: "#ffff33" } },
@@ -54,7 +54,7 @@ export const QUESTIONS = {
       { text: "Count this big school of fish!", options: ["6", "7", "8", "9"], correct: "7", visualType: "fish", visualData: { count: 7 } },
       { text: "What shape is a slice of pizza?", options: ["Square", "Circle", "Triangle", "Oval"], correct: "Triangle", visualType: "textOnly" },
       { text: "Which letter comes first in the alphabet?", options: ["B", "A", "C", "D"], correct: "A", visualType: "textOnly" },
-      { text: "What color is the green grass?", options: ["Green", "Blue", "Yellow", "Orange"], correct: "Green", visualType: "colors", visualData: { color1: "#2ecc71", color2: "#2ecc71" } }
+      { text: "What color is healthy grass?", options: ["Green", "Blue", "Yellow", "Orange"], correct: "Green", visualType: "colors", visualData: { color1: "#2ecc71", color2: "#2ecc71" } }
     ]
   },
   
