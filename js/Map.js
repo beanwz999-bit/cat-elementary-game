@@ -136,17 +136,23 @@ export const MapEngine = {
         }
       }
       
-      this.moveTarget = {
+      const potentialMoveTarget = {
         x: Math.max(20, Math.min(this.currentView === "hallway" ? 1580 : 780, clickX)),
         y: Math.max(minY, Math.min(maxY, clickY))
       };
       
       if (this.activeHotspot) {
         const distToPlayer = Math.hypot(this.playerX - this.activeHotspot.x, this.playerY - this.activeHotspot.y);
-        if (distToPlayer < 75) {
+        const distToClick = Math.hypot(clickX - this.activeHotspot.x, clickY - this.activeHotspot.y);
+        // Only open the minigame if the player is within range AND they tapped directly on the active hotspot desk/door (within 75px)
+        if (distToPlayer < 75 && distToClick < 75) {
           this.interactWithHotspot();
+          return; // Skip setting moveTarget so they don't start walking
         }
       }
+
+      // If they tapped far away from the active desk/door, set the move target so they walk away
+      this.moveTarget = potentialMoveTarget;
     };
 
     this.canvas.addEventListener("mousedown", (e) => {
@@ -166,6 +172,21 @@ export const MapEngine = {
         this.handleCanvasInput(clickX, clickY);
       }
     }, { passive: false });
+
+    // Allow direct clicks/taps on the visual interaction prompt bubble overlay
+    const promptEl = document.getElementById("interact-prompt");
+    if (promptEl) {
+      const handlePromptClick = (e) => {
+        if (this.isModalOpen()) return;
+        e.preventDefault();
+        e.stopPropagation();
+        if (this.activeHotspot) {
+          this.interactWithHotspot();
+        }
+      };
+      promptEl.addEventListener("click", handlePromptClick);
+      promptEl.addEventListener("touchstart", handlePromptClick, { passive: false });
+    }
     
     this.setupClassroomHotspots(0);
     this.initNPCs();
