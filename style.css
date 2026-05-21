@@ -1688,3 +1688,341 @@ body, html {
   color: white;
 }
 
+/* Mobile Landscape & Short Viewport Optimizations */
+@media (max-height: 580px) {
+  /* 1. Start Screen Scaling */
+  .splash-overlay {
+    padding: 15px 25px;
+    max-width: 500px;
+    margin-top: 10px;
+  }
+  .game-title {
+    font-size: 2.2rem;
+    margin-bottom: 6px;
+    text-shadow: 2px 2px 0px #fff, 4px 4px 0px rgba(0,0,0,0.1);
+  }
+  .game-subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+  }
+  .menu-buttons {
+    gap: 10px;
+  }
+  .menu-buttons button {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
+  /* 2. Profiles Screen Scaling */
+  .profiles-container {
+    padding: 15px 20px;
+    max-height: 96vh;
+    overflow-y: auto;
+  }
+  .profiles-subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    margin-top: 4px;
+  }
+  .profiles-grid {
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .profile-card {
+    padding: 12px;
+    min-height: 210px;
+  }
+  .profile-title {
+    font-size: 1.15rem;
+  }
+  .profile-status {
+    font-size: 0.85rem;
+    margin: 4px 0;
+  }
+  .profile-actions button {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+
+  /* 3. Character Customizer Screen Scaling */
+  .customizer-container {
+    padding: 12px 20px;
+    max-height: 96vh;
+  }
+  .customizer-container h2 {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+  }
+  .customizer-hint {
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+  }
+  .player-count-selector {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    gap: 8px;
+  }
+  .player-count-selector button {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+  .players-setup-container {
+    margin-bottom: 12px;
+    gap: 12px;
+  }
+  .player-card {
+    min-width: 200px;
+    padding: 10px;
+  }
+  .player-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 6px;
+  }
+  .cat-preview-box {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 8px;
+  }
+  .customizer-input-group {
+    margin-bottom: 6px;
+  }
+  .customizer-input-group label {
+    font-size: 0.75rem;
+    margin-bottom: 2px;
+  }
+  .customizer-input-group input[type="text"],
+  .customizer-input-group select {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+  .customizer-actions {
+    margin-top: 4px;
+  }
+  .customizer-actions button {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+
+  /* 4. HUD Adjustments on Canvas Screen */
+  #hud-top {
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+    height: 46px;
+    width: calc(100% - 16px);
+    padding: 6px 12px;
+  }
+  .hud-grade-badge {
+    padding: 4px 10px;
+    font-size: 0.85rem;
+  }
+  .hud-players-status {
+    gap: 8px;
+  }
+  .hud-player-tag {
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    gap: 4px;
+  }
+  .hud-player-tag svg {
+    width: 18px;
+    height: 18px;
+  }
+  .grade-progress-container {
+    width: 110px !important;
+    margin-right: 8px !important;
+    gap: 2px;
+  }
+  .grade-progress-bar {
+    height: 8px;
+  }
+  #progress-text {
+    font-size: 0.7rem;
+  }
+  #hud-top .btn {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    border-radius: var(--radius-sm);
+  }
+
+  /* 5. Standard Minigame Modal */
+  .modal-content {
+    padding: 12px 20px;
+    max-width: 600px;
+    max-height: 96vh;
+    overflow-y: auto;
+    border-radius: var(--radius-md);
+  }
+  .modal-header {
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+  }
+  .modal-header h3 {
+    font-size: 1.25rem;
+  }
+  .close-btn {
+    font-size: 1.8rem;
+  }
+  .player-turn-announcement {
+    padding: 6px 12px;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+  }
+  .question-progress {
+    margin-bottom: 8px;
+    gap: 6px;
+  }
+  .question-progress .dot {
+    width: 10px;
+    height: 10px;
+  }
+  .question-text {
+    font-size: 1.05rem;
+    margin-bottom: 8px;
+  }
+  .question-visuals {
+    min-height: 60px;
+    height: 90px;
+    padding: 8px;
+    margin-bottom: 8px;
+  }
+  .question-visuals span {
+    font-size: 2.8rem !important;
+  }
+  .visual-fish {
+    font-size: 1.8rem !important;
+  }
+  .visual-letter-tile {
+    width: 38px;
+    height: 38px;
+    font-size: 1.2rem;
+    border-width: 2px;
+    box-shadow: 0 2px 0 var(--color-secondary);
+  }
+  .draggable-letters {
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .answer-options {
+    gap: 8px;
+  }
+  .answer-btn {
+    padding: 8px 12px;
+    font-size: 0.95rem;
+    border-radius: var(--radius-sm);
+  }
+  .typing-input {
+    font-size: 1.15rem;
+    padding: 6px 12px;
+    max-width: 320px;
+    margin-top: 4px;
+  }
+
+  /* 6. Principal Boss Fight Modal */
+  .boss-content {
+    padding: 12px 20px;
+    max-width: 780px;
+    max-height: 96vh;
+    overflow-y: auto;
+    border-radius: var(--radius-md);
+  }
+  .boss-header {
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+  }
+  .boss-header h2 {
+    font-size: 1.4rem;
+  }
+  .boss-arena {
+    gap: 12px;
+    grid-template-columns: 1fr 1.2fr;
+  }
+  .boss-visual-panel {
+    min-height: 160px;
+    padding: 10px;
+  }
+  .boss-graphic {
+    font-size: 3.5rem;
+    margin: 4px auto;
+  }
+  .boss-hp-bar-container {
+    margin-bottom: 6px;
+  }
+  .hp-bar-outer {
+    height: 12px;
+  }
+  .cats-army-wrapper {
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .boss-player-cat-avatar {
+    width: 36px;
+    height: 36px;
+  }
+  .boss-question-card {
+    padding: 10px;
+    margin-bottom: 8px;
+  }
+  .boss-question-card p {
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+  }
+
+  /* 7. Feedback Overlay inside Modal */
+  .feedback-box {
+    padding: 15px;
+  }
+  .feedback-message {
+    font-size: 1.25rem;
+  }
+
+  /* 8. Save/Load Modal */
+  .save-content {
+    padding: 12px 20px;
+    max-width: 480px;
+    max-height: 96vh;
+    overflow-y: auto;
+    gap: 10px;
+  }
+  .save-status-card {
+    padding: 8px;
+  }
+  .save-status-card h4 {
+    font-size: 0.95rem;
+    margin-bottom: 2px;
+  }
+  .save-status-info {
+    font-size: 0.85rem;
+  }
+  .save-actions-grid {
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .save-actions-grid button {
+    padding: 8px;
+    font-size: 0.85rem;
+  }
+
+  /* 9. Confirmation Dialog Modals */
+  .confirm-content {
+    padding: 12px 20px;
+    max-width: 400px;
+    max-height: 96vh;
+    overflow-y: auto;
+    gap: 8px;
+  }
+  .confirm-content h2 {
+    font-size: 1.25rem;
+  }
+  .confirm-content p {
+    font-size: 0.85rem;
+  }
+  .confirm-actions {
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .confirm-actions button {
+    padding: 8px;
+  }
+}
+
