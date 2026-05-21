@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cat Elementary - Puzzle RPG</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Fredoka is a super cute, rounded font perfect for a cartoon game -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:wght@300..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-container">
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- 1. Start Screen -->
+    <div id="start-screen" class="screen active">
+      <div class="splash-overlay">
+        <h1 class="game-title">Cat Elementary</h1>
+        <p class="game-subtitle">Team up with your kittens to pass Kindergarten through 5th Grade!</p>
+        <div class="menu-buttons">
+          <button id="start-game-btn" class="btn btn-success btn-lg">Start Game! 🐾</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1b. Profiles Screen -->
+    <div id="profiles-screen" class="screen">
+      <div class="profiles-container glass">
+        <h2>Choose Your Profile 🐾</h2>
+        <p class="profiles-subtitle">Select a slot to continue your journey or start a new team of kittens!</p>
+        
+        <div class="profiles-grid">
+          <!-- Profile 1 -->
+          <div class="profile-card glass" id="profile-card-1">
+            <h3 class="profile-title">Profile 1</h3>
+            <div class="profile-status" id="profile-status-1">
+              <!-- populated dynamically -->
+            </div>
+            <div class="profile-actions" id="profile-actions-1">
+              <!-- populated dynamically -->
+            </div>
+          </div>
+          
+          <!-- Profile 2 -->
+          <div class="profile-card glass" id="profile-card-2">
+            <h3 class="profile-title">Profile 2</h3>
+            <div class="profile-status" id="profile-status-2">
+              <!-- populated dynamically -->
+            </div>
+            <div class="profile-actions" id="profile-actions-2">
+              <!-- populated dynamically -->
+            </div>
+          </div>
+          
+          <!-- Profile 3 -->
+          <div class="profile-card glass" id="profile-card-3">
+            <h3 class="profile-title">Profile 3</h3>
+            <div class="profile-status" id="profile-status-3">
+              <!-- populated dynamically -->
+            </div>
+            <div class="profile-actions" id="profile-actions-3">
+              <!-- populated dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <div class="profiles-footer">
+          <button id="profiles-back-btn" class="btn btn-secondary">Back to Menu</button>
+          <button id="quick-play-btn" class="btn btn-primary">Quick Play 🐾</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Character Customizer Screen -->
+    <div id="customizer-screen" class="screen">
+      <div class="customizer-container glass">
+        <h2>Assemble Your Kitten Team!</h2>
+        <p class="customizer-hint">Choose 1 to 3 players. Pick a cute breed and name your kitty.</p>
+        
+        <div class="player-count-selector">
+          <span>Number of Players:</span>
+          <button type="button" class="btn btn-selector active" data-players="1">1 Player</button>
+          <button type="button" class="btn btn-selector" data-players="2">2 Players</button>
+          <button type="button" class="btn btn-selector" data-players="3">3 Players</button>
+        </div>
+
+        <div class="players-setup-container">
+          <!-- Dynamically populated via customizer.js -->
+        </div>
+
+        <div class="customizer-actions">
+          <button id="customizer-back-btn" class="btn btn-secondary">Back to Menu</button>
+          <button id="customizer-start-btn" class="btn btn-success">Start School! 🐾</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. RPG Exploration Screen (Hallway / Classroom) -->
+    <div id="exploration-screen" class="screen">
+      <canvas id="rpg-canvas"></canvas>
+      
+      <!-- HUD -->
+      <div id="hud-top" class="hud glass">
+        <div class="hud-left">
+          <span class="hud-grade-badge" id="hud-grade-title">Kindergarten</span>
+        </div>
+        <div class="hud-center">
+          <div class="hud-players-status" id="hud-players-list">
+            <!-- Dynamically populated active players -->
+          </div>
+        </div>
+        <div class="hud-right">
+          <div class="grade-progress-container" style="align-items: center; width: 160px; margin-right: 15px;">
+            <div class="grade-progress-bar" id="grade-progress"></div>
+            <span class="progress-label" id="progress-text">Minigames: 0/3</span>
+          </div>
+          <button id="save-progress-btn" class="btn btn-success btn-sm">Save Progress</button>
+          <button id="save-quit-btn" class="btn btn-danger btn-sm">Save & Menu</button>
+        </div>
+      </div>
+
+      <!-- Classroom Enter Prompt -->
+      <div id="interact-prompt" class="interact-prompt hidden">
+        <div class="interact-bubble">
+          <span class="interact-key">Space</span> or <span class="interact-click">Click</span> to Explore!
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Minigame Modal Overlay -->
+    <div id="minigame-modal" class="modal-overlay hidden">
+      <div class="modal-content glass">
+        <div class="modal-header">
+          <h3 id="minigame-title">Subject Puzzle</h3>
+          <span class="subject-badge" id="minigame-subject">Math</span>
+          <button id="minigame-close-btn" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="player-turn-announcement" id="minigame-turn-info">
+            <span class="active-cat-icon">🐾</span> It's <strong id="current-turn-player-name">Player</strong>'s turn!
+          </div>
+          
+          <!-- Progression dots -->
+          <div class="question-progress" id="question-progress-dots">
+            <!-- populated by JS e.g. <span class="dot active"></span> -->
+          </div>
+
+          <!-- Dynamic Question Panel -->
+          <div class="question-panel" id="question-panel">
+            <p class="question-text" id="question-text">What is 2 + 2?</p>
+            <div class="question-visuals" id="question-visuals">
+              <!-- Custom animations or item drawing like fishes or blocks -->
+            </div>
+            <div class="answer-options" id="answer-options">
+              <!-- Buttons for multiple choice -->
+            </div>
+          </div>
+
+          <!-- Feedback Box -->
+          <div class="feedback-box hidden" id="feedback-box">
+            <div class="feedback-content">
+              <span class="feedback-icon" id="feedback-icon">🎉</span>
+              <p class="feedback-message" id="feedback-message">Great job! Purr-fect!</p>
+            </div>
+            <div class="feedback-actions" id="feedback-actions" style="display: flex; gap: 16px; justify-content: center; width: 100%;">
+              <button id="feedback-next-btn" class="btn btn-success">Next Question</button>
+              <button id="feedback-exit-btn" class="btn btn-danger hidden">Exit Subject 🚪</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Principal Boss Modal Overlay -->
+    <div id="boss-modal" class="modal-overlay hidden">
+      <div class="boss-content glass">
+        <div class="boss-header">
+          <h2>Principal's Office: The Ultimate Vacuum Boss!</h2>
+        </div>
+        <div class="boss-arena">
+          <!-- Boss Visual Panel -->
+          <div class="boss-visual-panel">
+            <div class="boss-character-wrapper">
+              <div class="boss-hp-bar-container">
+                <span class="hp-label">Vacuum Cleaner HP:</span>
+                <div class="hp-bar-outer"><div class="hp-bar-inner" id="boss-hp"></div></div>
+              </div>
+              <!-- SVG Vacuum cleaner drawing or simple css representation -->
+              <div class="boss-graphic" id="boss-graphic">
+                🌀
+              </div>
+            </div>
+            
+            <div class="cats-army-wrapper" id="boss-player-cats">
+              <!-- Active player cats standing together -->
+            </div>
+          </div>
+
+          <!-- Battle Question Panel -->
+          <div class="boss-control-panel">
+            <div class="player-turn-announcement" id="boss-turn-info">
+              🐾 <strong id="boss-current-player">Milo</strong>'s Turn!
+            </div>
+            <div class="boss-question-card">
+              <p id="boss-question-text">Ready for the final exam?</p>
+              <div class="answer-options" id="boss-answer-options">
+                <!-- multiple choice buttons -->
+              </div>
+            </div>
+            <!-- Feedback Overlay inside battle -->
+            <div class="boss-feedback hidden" id="boss-feedback">
+              <span id="boss-feedback-icon">💥</span>
+              <p id="boss-feedback-msg">Hit! The Vacuum took 20 damage!</p>
+              <button id="boss-next-round-btn" class="btn btn-warning">Next Turn</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Graduation / Game Over Overlay -->
+    <div id="victory-modal" class="modal-overlay hidden">
+      <div class="victory-content glass animate-pop">
+        <div class="graduation-cap">🎓</div>
+        <h2>Happy Graduation!</h2>
+        <p>Congratulations, Class! You and your classmates have completed all grades from Kindergarten to 5th Grade, conquered the giant mechanical vacuum cleaner, and graduated from Cat Elementary with straight A's!</p>
+        
+        <div class="graduating-cats" id="victory-cats">
+          <!-- SVG cats with graduation caps -->
+        </div>
+
+        <button id="victory-restart-btn" class="btn btn-success btn-lg">Back to Main Menu</button>
+      </div>
+    </div>
+
+    <!-- 7. Graduation Certificate / Banner Modal -->
+    <div id="grad-modal" class="modal-overlay hidden">
+      <div class="grad-content glass animate-pop">
+        <div class="grad-scroll">
+          <div class="grad-badge">🎓</div>
+          <h2>Meow-gratulations!</h2>
+          <h3 id="grad-title">You graduated Kindergarten!</h3>
+          <p class="grad-message">All classmates are super claw-ver! You have successfully passed the graduation test with flying colors. Keep up the claw-some work in the next grade! 🐾</p>
+          <div class="confetti-container" id="grad-confetti"></div>
+          <button id="grad-close-btn" class="btn btn-success btn-lg">Awesome! 🐾</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Save Management Modal -->
+    <div id="save-modal" class="modal-overlay hidden">
+      <div class="save-content glass animate-pop">
+        <div class="modal-header">
+          <h2>Progress Manager 🐾</h2>
+          <button id="save-modal-close-btn" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p class="save-modal-hint">Backup, restore, or reset your kittens' school progress.</p>
+          
+          <div class="save-status-card">
+            <h4>Active Progress Info:</h4>
+            <div id="save-status-info" class="save-status-info">
+              <!-- Dynamically populated or 'No active save found.' -->
+            </div>
+          </div>
+          
+          <div class="save-actions-grid">
+            <button id="export-save-btn" class="btn btn-secondary">
+              📥 Export Progress File
+            </button>
+            <button id="import-trigger-btn" class="btn btn-primary">
+              📤 Import Progress File
+            </button>
+            <input type="file" id="import-file-input" accept=".json" style="display: none;">
+            <button id="reset-save-trigger-btn" class="btn btn-danger">
+              💥 Wipe Save Progress
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. Reset Confirmation Modal -->
+    <div id="confirm-modal" class="modal-overlay hidden">
+      <div class="confirm-content glass animate-pop">
+        <h2>Delete Profile? ⚠️</h2>
+        <p>Are you sure you want to permanently delete this profile? This will delete all kittens, grades, and completed puzzles, and cannot be undone!</p>
+        <div class="confirm-actions">
+          <button id="confirm-cancel-btn" class="btn btn-secondary">Cancel</button>
+          <button id="confirm-ok-btn" class="btn btn-danger">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
