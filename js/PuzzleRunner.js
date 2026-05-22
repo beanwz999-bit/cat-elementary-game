@@ -19,6 +19,11 @@ export const PuzzleRunner = {
     this.typingStartTime = null;
   },
 
+  isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+           (('ontouchstart' in window) && window.innerWidth <= 1024);
+  },
+
   /**
    * Start a puzzle minigame
    */
@@ -42,17 +47,48 @@ export const PuzzleRunner = {
       answersCorrect: new Array(questions.length).fill(false)
     };
 
-    // Show modal
-    const modal = document.getElementById("minigame-modal");
-    modal.classList.remove("hidden");
+    const proceedToGame = () => {
+      // Show modal
+      const modal = document.getElementById("minigame-modal");
+      modal.classList.remove("hidden");
 
-    // Set titles
-    document.getElementById("minigame-title").innerText = `${this.getSubjectName(subject)} Puzzle`;
-    const subBadge = document.getElementById("minigame-subject");
-    subBadge.innerText = subject.toUpperCase();
-    subBadge.className = `subject-badge badge-${subject}`;
+      // Set titles
+      document.getElementById("minigame-title").innerText = `${this.getSubjectName(subject)} Puzzle`;
+      const subBadge = document.getElementById("minigame-subject");
+      subBadge.innerText = subject.toUpperCase();
+      subBadge.className = `subject-badge badge-${subject}`;
 
-    this.renderQuestion();
+      this.renderQuestion();
+    };
+
+    if (subject === "typing" && this.isMobileDevice()) {
+      const portraitModal = document.getElementById("typing-portrait-modal");
+      if (portraitModal) {
+        portraitModal.classList.remove("hidden");
+        
+        const readyBtn = document.getElementById("typing-portrait-ready-btn");
+        if (readyBtn) {
+          readyBtn.onclick = () => {
+            portraitModal.classList.add("hidden");
+            proceedToGame();
+          };
+        } else {
+          proceedToGame();
+        }
+
+        const closeBtn = document.getElementById("typing-portrait-close-btn");
+        if (closeBtn) {
+          closeBtn.onclick = () => {
+            portraitModal.classList.add("hidden");
+            this.close();
+          };
+        }
+      } else {
+        proceedToGame();
+      }
+    } else {
+      proceedToGame();
+    }
   },
 
   getSubjectName(sub) {
