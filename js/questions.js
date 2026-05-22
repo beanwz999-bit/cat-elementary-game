@@ -165,16 +165,16 @@ export const QUESTIONS = {
       { text: "What time is shown on this clock?", options: ["4:30", "5:30", "3:30", "6:30"], correct: "4:30", visualType: "clock", visualData: { hour: 4, minute: 30 } }
     ],
     typing: [
-      { text: "Type the word correctly!", correct: "kitten", visualType: "typing", visualData: { word: "kitten" } },
-      { text: "Type the word correctly!", correct: "laptop", visualType: "typing", visualData: { word: "laptop" } },
-      { text: "Type the word correctly!", correct: "whiskers", visualType: "typing", visualData: { word: "whiskers" } },
-      { text: "Type the word correctly!", correct: "keyboard", visualType: "typing", visualData: { word: "keyboard" } },
-      { text: "Type the word correctly!", correct: "screen", visualType: "typing", visualData: { word: "screen" } },
-      { text: "Type the word correctly!", correct: "mouse", visualType: "typing", visualData: { word: "mouse" } },
-      { text: "Type the word correctly!", correct: "claws", visualType: "typing", visualData: { word: "claws" } },
-      { text: "Type the word correctly!", correct: "purr", visualType: "typing", visualData: { word: "purr" } },
-      { text: "Type the word correctly!", correct: "meow", visualType: "typing", visualData: { word: "meow" } },
-      { text: "Type the word correctly!", correct: "naptime", visualType: "typing", visualData: { word: "naptime" } }
+      { text: "Type the word correctly!", correct: "cat", visualType: "typing", visualData: { word: "cat" } },
+      { text: "Type the word correctly!", correct: "paw", visualType: "typing", visualData: { word: "paw" } },
+      { text: "Type the word correctly!", correct: "milk", visualType: "typing", visualData: { word: "milk" } },
+      { text: "Type the word correctly!", correct: "yarn", visualType: "typing", visualData: { word: "yarn" } },
+      { text: "Type the word correctly!", correct: "fish", visualType: "typing", visualData: { word: "fish" } },
+      { text: "Type the word correctly!", correct: "toy", visualType: "typing", visualData: { word: "toy" } },
+      { text: "Type the word correctly!", correct: "nap", visualType: "typing", visualData: { word: "nap" } },
+      { text: "Type the word correctly!", correct: "fur", visualType: "typing", visualData: { word: "fur" } },
+      { text: "Type the word correctly!", correct: "claw", visualType: "typing", visualData: { word: "claw" } },
+      { text: "Type the word correctly!", correct: "purr", visualType: "typing", visualData: { word: "purr" } }
     ]
   },
 
