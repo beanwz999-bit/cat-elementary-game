@@ -165,16 +165,16 @@ export const QUESTIONS = {
       { text: "What time is shown on this clock?", options: ["4:30", "5:30", "3:30", "6:30"], correct: "4:30", visualType: "clock", visualData: { hour: 4, minute: 30 } }
     ],
     typing: [
-      { text: "Type the word before it hits the bottom!", correct: "kitten", visualType: "typing", visualData: { word: "kitten" } },
-      { text: "Type the word before it hits the bottom!", correct: "laptop", visualType: "typing", visualData: { word: "laptop" } },
-      { text: "Type the word before it hits the bottom!", correct: "whiskers", visualType: "typing", visualData: { word: "whiskers" } },
-      { text: "Type the word before it hits the bottom!", correct: "keyboard", visualType: "typing", visualData: { word: "keyboard" } },
-      { text: "Type the word before it hits the bottom!", correct: "screen", visualType: "typing", visualData: { word: "screen" } },
-      { text: "Type the word before it hits the bottom!", correct: "mouse", visualType: "typing", visualData: { word: "mouse" } },
-      { text: "Type the word before it hits the bottom!", correct: "claws", visualType: "typing", visualData: { word: "claws" } },
-      { text: "Type the word before it hits the bottom!", correct: "purr", visualType: "typing", visualData: { word: "purr" } },
-      { text: "Type the word before it hits the bottom!", correct: "meow", visualType: "typing", visualData: { word: "meow" } },
-      { text: "Type the word before it hits the bottom!", correct: "naptime", visualType: "typing", visualData: { word: "naptime" } }
+      { text: "Type the word correctly!", correct: "kitten", visualType: "typing", visualData: { word: "kitten" } },
+      { text: "Type the word correctly!", correct: "laptop", visualType: "typing", visualData: { word: "laptop" } },
+      { text: "Type the word correctly!", correct: "whiskers", visualType: "typing", visualData: { word: "whiskers" } },
+      { text: "Type the word correctly!", correct: "keyboard", visualType: "typing", visualData: { word: "keyboard" } },
+      { text: "Type the word correctly!", correct: "screen", visualType: "typing", visualData: { word: "screen" } },
+      { text: "Type the word correctly!", correct: "mouse", visualType: "typing", visualData: { word: "mouse" } },
+      { text: "Type the word correctly!", correct: "claws", visualType: "typing", visualData: { word: "claws" } },
+      { text: "Type the word correctly!", correct: "purr", visualType: "typing", visualData: { word: "purr" } },
+      { text: "Type the word correctly!", correct: "meow", visualType: "typing", visualData: { word: "meow" } },
+      { text: "Type the word correctly!", correct: "naptime", visualType: "typing", visualData: { word: "naptime" } }
     ]
   },
 
@@ -231,16 +231,16 @@ export const QUESTIONS = {
       { text: "What is the process of water boiling into steam?", options: ["Evaporation", "Freezing", "Condensation", "Melting"], correct: "Evaporation", visualType: "textOnly" }
     ],
     typing: [
-      { text: "Type the word before it hits the bottom!", correct: "computer", visualType: "typing", visualData: { word: "computer" } },
-      { text: "Type the word before it hits the bottom!", correct: "elementary", visualType: "typing", visualData: { word: "elementary" } },
-      { text: "Type the word before it hits the bottom!", correct: "monitor", visualType: "typing", visualData: { word: "monitor" } },
-      { text: "Type the word before it hits the bottom!", correct: "scrolling", visualType: "typing", visualData: { word: "scrolling" } },
-      { text: "Type the word before it hits the bottom!", correct: "pouncing", visualType: "typing", visualData: { word: "pouncing" } },
-      { text: "Type the word before it hits the bottom!", correct: "scratchpad", visualType: "typing", visualData: { word: "scratchpad" } },
-      { text: "Type the word before it hits the bottom!", correct: "internet", visualType: "typing", visualData: { word: "internet" } },
-      { text: "Type the word before it hits the bottom!", correct: "password", visualType: "typing", visualData: { word: "password" } },
-      { text: "Type the word before it hits the bottom!", correct: "catnip", visualType: "typing", visualData: { word: "catnip" } },
-      { text: "Type the word before it hits the bottom!", correct: "feathers", visualType: "typing", visualData: { word: "feathers" } }
+      { text: "Type the word correctly!", correct: "computer", visualType: "typing", visualData: { word: "computer" } },
+      { text: "Type the word correctly!", correct: "elementary", visualType: "typing", visualData: { word: "elementary" } },
+      { text: "Type the word correctly!", correct: "monitor", visualType: "typing", visualData: { word: "monitor" } },
+      { text: "Type the word correctly!", correct: "scrolling", visualType: "typing", visualData: { word: "scrolling" } },
+      { text: "Type the word correctly!", correct: "pouncing", visualType: "typing", visualData: { word: "pouncing" } },
+      { text: "Type the word correctly!", correct: "scratchpad", visualType: "typing", visualData: { word: "scratchpad" } },
+      { text: "Type the word correctly!", correct: "internet", visualType: "typing", visualData: { word: "internet" } },
+      { text: "Type the word correctly!", correct: "password", visualType: "typing", visualData: { word: "password" } },
+      { text: "Type the word correctly!", correct: "catnip", visualType: "typing", visualData: { word: "catnip" } },
+      { text: "Type the word correctly!", correct: "feathers", visualType: "typing", visualData: { word: "feathers" } }
     ]
   },
 

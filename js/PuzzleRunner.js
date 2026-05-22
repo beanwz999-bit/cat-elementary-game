@@ -273,51 +273,63 @@ export const PuzzleRunner = {
       wordDiv.innerText = data.word;
       container.appendChild(wordDiv);
 
-      this.clearTypingTimer();
-
-      // Determine grade-scaled duration (10s at Grade 2 down to 7s at Grade 5)
       let gradeNum = parseInt(this.activeGame.grade);
       if (isNaN(gradeNum)) {
         gradeNum = this.activeGame.grade === "K" ? 0 : 2;
       }
-      this.typingDuration = Math.max(6000, (12 - gradeNum) * 1000);
 
-      this.tickTyping = (timestamp) => {
-        if (!this.activeGame) return;
-        const currentQ = this.activeGame.questions[this.activeGame.currentIdx];
-        if (!currentQ || currentQ.visualType !== "typing") return;
+      // If Grade 2 or 3, words don't move and there is no danger zone
+      const isStaticMode = (gradeNum === 2 || gradeNum === 3);
 
-        if (!this.typingStartTime) {
-          this.typingStartTime = timestamp;
-        }
+      if (isStaticMode) {
+        dangerPad.style.display = "none";
+        wordDiv.style.top = "45px"; // Centered vertically in the 140px container
+      } else {
+        // For Grade 4 & 5, slow down by 50% (double the duration)
+        this.typingDuration = Math.max(6000, (12 - gradeNum) * 1000) * 2;
+        wordDiv.style.top = "10px"; // Initial top position
+      }
 
-        const elapsed = timestamp - this.typingStartTime;
-        const progress = Math.min(1, elapsed / this.typingDuration);
+      this.clearTypingTimer();
 
-        // Map progress to falling coordinates inside the 140px high terminal view
-        const startY = 10;
-        const endY = 105; // hits the caution line beautifully
-        const currentY = startY + progress * (endY - startY);
+      if (!isStaticMode) {
+        this.tickTyping = (timestamp) => {
+          if (!this.activeGame) return;
+          const currentQ = this.activeGame.questions[this.activeGame.currentIdx];
+          if (!currentQ || currentQ.visualType !== "typing") return;
 
-        const el = document.getElementById("falling-word");
-        if (el) {
-          el.style.top = `${currentY}px`;
-        }
-
-        if (progress >= 1) {
-          // Touchdown failure!
-          this.clearTypingTimer();
-          const inputEl = document.getElementById("typing-game-input");
-          if (inputEl) {
-            inputEl.disabled = true;
+          if (!this.typingStartTime) {
+            this.typingStartTime = timestamp;
           }
-          this.handleAnswer(""); // incorrect empty answer
-        } else {
-          this.typingAnimationId = requestAnimationFrame(this.tickTyping);
-        }
-      };
 
-      this.typingAnimationId = requestAnimationFrame(this.tickTyping);
+          const elapsed = timestamp - this.typingStartTime;
+          const progress = Math.min(1, elapsed / this.typingDuration);
+
+          // Map progress to falling coordinates inside the 140px high terminal view
+          const startY = 10;
+          const endY = 105; // hits the caution line beautifully
+          const currentY = startY + progress * (endY - startY);
+
+          const el = document.getElementById("falling-word");
+          if (el) {
+            el.style.top = `${currentY}px`;
+          }
+
+          if (progress >= 1) {
+            // Touchdown failure!
+            this.clearTypingTimer();
+            const inputEl = document.getElementById("typing-game-input");
+            if (inputEl) {
+              inputEl.disabled = true;
+            }
+            this.handleAnswer(""); // incorrect empty answer
+          } else {
+            this.typingAnimationId = requestAnimationFrame(this.tickTyping);
+          }
+        };
+
+        this.typingAnimationId = requestAnimationFrame(this.tickTyping);
+      }
     } else {
       // TextOnly - Simple generic picture or icon
       container.style.background = "linear-gradient(135deg, #e0f7fa 0%, #80deea 100%)";
