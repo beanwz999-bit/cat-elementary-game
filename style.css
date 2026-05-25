@@ -2047,27 +2047,95 @@ body, html {
 .stage-backdrop {
   height: 75%;
   position: relative;
-  background: linear-gradient(to bottom, #1a052e, #310a5a);
+  background: 
+    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+    repeating-linear-gradient(90deg, #2a1442, #2a1442 60px, #200d34 60px, #200d34 120px); /* Deep wood panels */
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 8px solid #5c3a21; /* Wood trim behind stage floor */
+  border-bottom: 12px solid #5c3a21; /* Thick dark wood stage trim */
+  box-shadow: inset 0 -15px 30px rgba(0,0,0,0.8);
 }
 
 .backdrop-banner {
   font-family: 'Fredoka', sans-serif;
-  font-size: 2.2rem;
+  font-size: 2.3rem;
   color: #f1c40f;
-  text-shadow: 0 0 10px rgba(241,196,15,0.6);
+  background: rgba(32, 13, 52, 0.85);
+  padding: 14px 35px;
+  border: 4px double #f1c40f;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5), inset 0 0 15px rgba(241,196,15,0.25);
+  text-shadow: 0 3px 6px rgba(0,0,0,0.6);
   font-weight: bold;
-  margin-bottom: 60px;
+  margin-bottom: 75px;
   letter-spacing: 2px;
+  z-index: 5;
+  position: relative;
   animation: shine-banner 3s ease-in-out infinite alternate;
 }
 
+/* String Lights */
+.stage-string-lights {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  z-index: 5;
+}
+
+.stage-string-lights .light {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffeb3b;
+  box-shadow: 0 0 12px #ffeb3b, 0 0 24px rgba(255,235,59,0.6);
+  animation: blink-light 1.6s infinite alternate ease-in-out;
+}
+
+.stage-string-lights .light:nth-child(even) {
+  animation-delay: 0.8s;
+  background: #ff7675;
+  box-shadow: 0 0 12px #ff7675, 0 0 24px rgba(255,118,117,0.6);
+}
+
+@keyframes blink-light {
+  0% { opacity: 0.5; transform: scale(0.85); }
+  100% { opacity: 1; transform: scale(1.15); }
+}
+
+/* Spotlight overlay */
+.stage-spotlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 65%);
+  pointer-events: none;
+  z-index: 7;
+}
+
+/* Stage Plants Decor */
+.stage-decoration {
+  position: absolute;
+  bottom: 25px;
+  font-size: 3.2rem;
+  z-index: 9;
+  filter: drop-shadow(0 5px 8px rgba(0,0,0,0.35));
+}
+.stage-decor-left {
+  left: 9%;
+}
+.stage-decor-right {
+  right: 9%;
+}
+
 @keyframes shine-banner {
-  0% { text-shadow: 0 0 10px rgba(241,196,15,0.5); filter: brightness(1); }
-  100% { text-shadow: 0 0 25px rgba(241,196,15,0.9), 0 0 40px rgba(241,196,15,0.4); filter: brightness(1.2); }
+  0% { text-shadow: 0 2px 4px rgba(0,0,0,0.6); filter: brightness(1); }
+  100% { text-shadow: 0 2px 4px rgba(0,0,0,0.6), 0 0 15px rgba(241,196,15,0.4); filter: brightness(1.15); }
 }
 
 .stage-particles {
