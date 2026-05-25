@@ -2211,7 +2211,8 @@ body, html {
   position: absolute;
   left: 55%;
   top: -80px;
-  font-size: 3.8rem;
+  width: 110px;
+  height: 50px;
   z-index: 11;
   opacity: 0;
   transform: translateX(-50%);

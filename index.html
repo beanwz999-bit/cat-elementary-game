@@ -279,7 +279,20 @@
           <div class="stage-podium">🎤</div>
           
           <!-- Diploma/Scroll that appears -->
-          <div id="stage-diploma" class="stage-diploma hidden">📜</div>
+          <div id="stage-diploma" class="stage-diploma hidden">
+            <svg viewBox="0 0 100 45" width="110" height="50" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));">
+              <!-- Rolled scroll body -->
+              <rect x="12" y="10" width="76" height="20" rx="10" fill="#fcfcfc" stroke="#2c3e50" stroke-width="3" />
+              <!-- Curled side rolls to give 3D depth -->
+              <ellipse cx="12" cy="20" rx="4" ry="10" fill="#e0e0e0" stroke="#2c3e50" stroke-width="3" />
+              <ellipse cx="88" cy="20" rx="4" ry="10" fill="#fcfcfc" stroke="#2c3e50" stroke-width="3" />
+              <!-- Ribbon band in center -->
+              <rect x="44" y="8" width="12" height="24" fill="#e74c3c" stroke="#2c3e50" stroke-width="2.5" />
+              <!-- Ribbon tails -->
+              <path d="M46,30 L40,41 L48,38 Z" fill="#e74c3c" stroke="#2c3e50" stroke-width="2" stroke-linejoin="round" />
+              <path d="M54,30 L60,41 L52,38 Z" fill="#e74c3c" stroke="#2c3e50" stroke-width="2" stroke-linejoin="round" />
+            </svg>
+          </div>
           
           <!-- Graduation Cat Character Container -->
           <div id="stage-player-cat" class="stage-cat"></div>
