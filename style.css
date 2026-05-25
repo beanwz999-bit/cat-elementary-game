@@ -921,10 +921,18 @@ body, html {
 }
 
 .boss-header {
+  position: relative;
   text-align: center;
   margin-bottom: 20px;
   border-bottom: 2px solid rgba(0,0,0,0.06);
   padding-bottom: 12px;
+}
+
+.boss-header .close-btn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .boss-header h2 {

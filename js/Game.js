@@ -60,6 +60,12 @@ export const Game = {
       PuzzleRunner.close();
     });
     
+    // Boss modal close button
+    document.getElementById("boss-close-btn").addEventListener("click", () => {
+      document.getElementById("boss-modal").classList.add("hidden");
+      this.startLoop();
+    });
+    
     // Victory graduation buttons
     document.getElementById("victory-menu-btn").addEventListener("click", () => {
       document.getElementById("victory-modal").classList.add("hidden");
