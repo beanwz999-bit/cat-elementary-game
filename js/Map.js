@@ -912,8 +912,8 @@ export const MapEngine = {
     // Exit Sign/Arrow pointing left
     ctx.save();
     const bobX = Math.sin(Date.now() / 250) * 3;
-    const signX = 52 + bobX;
-    const signY = 175;
+    const signX = 70 + bobX;
+    const signY = 270;
     const signW = 105;
     const signH = 22;
     const r = 6;
