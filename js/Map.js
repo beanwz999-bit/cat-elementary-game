@@ -797,11 +797,12 @@ export const MapEngine = {
       
       // Name tag taped to locker
       ctx.fillStyle = "#ffffff";
-      ctx.fillRect(xPos + 2, 140, 16, 8);
-      ctx.strokeRect(xPos + 2, 140, 16, 8);
+      ctx.fillRect(xPos + 1, 140, 18, 8);
+      ctx.strokeRect(xPos + 1, 140, 18, 8);
       ctx.fillStyle = "#2c3e50";
-      ctx.font = "bold 6px Nunito";
-      ctx.fillText(locker.name, xPos + 10, 146);
+      ctx.font = "bold 5px Nunito";
+      ctx.textAlign = "center";
+      ctx.fillText(locker.name, xPos + 10, 146, 16);
       
       // Drawing/Star sticker taped on some lockers
       if (idx % 2 === 0) {
