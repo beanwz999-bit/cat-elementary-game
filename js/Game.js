@@ -817,21 +817,64 @@ export const Game = {
       catContainer.appendChild(wrapper);
     });
 
-    // Render cheering crowd
-    const crowdContainer = document.getElementById("stage-crowd");
-    if (crowdContainer) {
-      crowdContainer.innerHTML = "";
+    // Render cheering crowd in auditorium seats
+    const rowBack = document.getElementById("audience-row-back");
+    const rowFront = document.getElementById("audience-row-front");
+    if (rowBack && rowFront) {
+      rowBack.innerHTML = "";
+      rowFront.innerHTML = "";
+      
       const crowdBreeds = ["calico", "siamese", "tuxedo", "persian", "russianblue", "tabby"];
       const collarColors = ["#e74c3c", "#3498db", "#2ecc71", "#f1c40f", "#9b59b6", "#e67e22"];
-      for (let i = 0; i < 7; i++) {
+      
+      // Populate Back Row (4 cats)
+      for (let i = 0; i < 4; i++) {
+        const seat = document.createElement("div");
+        seat.className = "auditorium-seat";
+        
+        const seatBack = document.createElement("div");
+        seatBack.className = "seat-back";
+        seat.appendChild(seatBack);
+        
         const crowdCat = document.createElement("div");
         crowdCat.className = "crowd-cat";
         const breed = crowdBreeds[i % crowdBreeds.length];
-        const color = collarColors[(i + 2) % collarColors.length];
+        const color = collarColors[(i + 1) % collarColors.length];
+        crowdCat.innerHTML = CatRenderer.getSVG(breed, color);
+        crowdCat.style.animationDelay = `${Math.random() * 0.5}s`;
+        crowdCat.style.animationDuration = `${0.7 + Math.random() * 0.4}s`;
+        seat.appendChild(crowdCat);
+        
+        const seatFront = document.createElement("div");
+        seatFront.className = "seat-front";
+        seat.appendChild(seatFront);
+        
+        rowBack.appendChild(seat);
+      }
+      
+      // Populate Front Row (4 cats)
+      for (let i = 0; i < 4; i++) {
+        const seat = document.createElement("div");
+        seat.className = "auditorium-seat";
+        
+        const seatBack = document.createElement("div");
+        seatBack.className = "seat-back";
+        seat.appendChild(seatBack);
+        
+        const crowdCat = document.createElement("div");
+        crowdCat.className = "crowd-cat";
+        const breed = crowdBreeds[(i + 3) % crowdBreeds.length];
+        const color = collarColors[(i + 4) % collarColors.length];
         crowdCat.innerHTML = CatRenderer.getSVG(breed, color);
         crowdCat.style.animationDelay = `${Math.random() * 0.5}s`;
         crowdCat.style.animationDuration = `${0.6 + Math.random() * 0.4}s`;
-        crowdContainer.appendChild(crowdCat);
+        seat.appendChild(crowdCat);
+        
+        const seatFront = document.createElement("div");
+        seatFront.className = "seat-front";
+        seat.appendChild(seatFront);
+        
+        rowFront.appendChild(seat);
       }
     }
 
