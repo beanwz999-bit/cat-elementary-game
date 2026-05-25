@@ -909,6 +909,64 @@ export const MapEngine = {
     ctx.fill();
     ctx.stroke();
     
+    // Exit Sign/Arrow pointing left
+    ctx.save();
+    const bobX = Math.sin(Date.now() / 250) * 3;
+    const signX = 52 + bobX;
+    const signY = 175;
+    const signW = 105;
+    const signH = 22;
+    const r = 6;
+    
+    // Draw bubble shadow
+    const sx = signX + 2;
+    const sy = signY + 2;
+    ctx.fillStyle = "rgba(44, 62, 80, 0.15)";
+    ctx.beginPath();
+    ctx.moveTo(sx + r, sy - signH / 2);
+    ctx.lineTo(sx + signW - r, sy - signH / 2);
+    ctx.quadraticCurveTo(sx + signW, sy - signH / 2, sx + signW, sy - signH / 2 + r);
+    ctx.lineTo(sx + signW, sy + signH / 2 - r);
+    ctx.quadraticCurveTo(sx + signW, sy + signH / 2, sx + signW - r, sy + signH / 2);
+    ctx.lineTo(sx + r, sy + signH / 2);
+    ctx.quadraticCurveTo(sx, sy + signH / 2, sx, sy + signH / 2 - r);
+    ctx.lineTo(sx, sy - signH / 2 + r);
+    ctx.quadraticCurveTo(sx, sy - signH / 2, sx + r, sy - signH / 2);
+    ctx.closePath();
+    ctx.fill();
+    
+    // Draw bubble body
+    ctx.fillStyle = "#ffffff";
+    ctx.strokeStyle = "#2c3e50";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(signX + r, signY - signH / 2);
+    ctx.lineTo(signX + signW - r, signY - signH / 2);
+    ctx.quadraticCurveTo(signX + signW, signY - signH / 2, signX + signW, signY - signH / 2 + r);
+    ctx.lineTo(signX + signW, signY + signH / 2 - r);
+    ctx.quadraticCurveTo(signX + signW, signY + signH / 2, signX + signW - r, signY + signH / 2);
+    ctx.lineTo(signX + r, signY + signH / 2);
+    ctx.quadraticCurveTo(signX, signY + signH / 2, signX, signY + signH / 2 - r);
+    
+    // Left-pointing triangle
+    ctx.lineTo(signX, signY + 5);
+    ctx.lineTo(signX - 6, signY);
+    ctx.lineTo(signX, signY - 5);
+    
+    ctx.lineTo(signX, signY - signH / 2 + r);
+    ctx.quadraticCurveTo(signX, signY - signH / 2, signX + r, signY - signH / 2);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+    
+    // Draw text inside
+    ctx.fillStyle = "#2c3e50";
+    ctx.font = "bold 9.5px Fredoka";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+    ctx.fillText("🚪 Exit to Hallway", signX + 6, signY);
+    ctx.restore();
+    
     // Big green chalkboard on center wall
     ctx.fillStyle = "#1e8449";
     ctx.fillRect(180, 45, 440, 120);
