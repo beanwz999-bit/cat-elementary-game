@@ -2027,3 +2027,253 @@ body, html {
   }
 }
 
+/* --- GRADUATION THEATER STYLES --- */
+.graduation-theater {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+}
+
+.stage-backdrop {
+  height: 75%;
+  position: relative;
+  background: linear-gradient(to bottom, #1a052e, #310a5a);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 8px solid #5c3a21; /* Wood trim behind stage floor */
+}
+
+.backdrop-banner {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 2.2rem;
+  color: #f1c40f;
+  text-shadow: 0 0 10px rgba(241,196,15,0.6);
+  font-weight: bold;
+  margin-bottom: 60px;
+  letter-spacing: 2px;
+  animation: shine-banner 3s ease-in-out infinite alternate;
+}
+
+@keyframes shine-banner {
+  0% { text-shadow: 0 0 10px rgba(241,196,15,0.5); filter: brightness(1); }
+  100% { text-shadow: 0 0 25px rgba(241,196,15,0.9), 0 0 40px rgba(241,196,15,0.4); filter: brightness(1.2); }
+}
+
+.stage-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 6;
+  overflow: hidden;
+}
+
+.curtain {
+  position: absolute;
+  top: 0;
+  width: 51%; /* Slight overlap in the middle */
+  height: 75%;
+  background: repeating-linear-gradient(
+    90deg,
+    #962d2d,
+    #962d2d 25px,
+    #b03a3a 25px,
+    #b03a3a 50px
+  );
+  box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+  z-index: 10;
+  transition: transform 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.curtain-left {
+  left: 0;
+  transform-origin: left;
+  border-right: 2px solid #5c1b1b;
+}
+
+.curtain-right {
+  right: 0;
+  transform-origin: right;
+  border-left: 2px solid #5c1b1b;
+}
+
+.curtain-left.open {
+  transform: scaleX(0.06);
+}
+
+.curtain-right.open {
+  transform: scaleX(0.06);
+}
+
+.stage-floor {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 25%;
+  background: linear-gradient(to bottom, #8e4f2b, #5a3118);
+  border-top: 4px solid #a05c32;
+  box-shadow: inset 0 15px 30px rgba(0,0,0,0.6);
+  z-index: 8;
+}
+
+.stage-podium {
+  position: absolute;
+  right: 15%;
+  bottom: 25px;
+  font-size: 3.5rem;
+  z-index: 9;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+}
+
+.stage-diploma {
+  position: absolute;
+  left: 55%;
+  top: -80px;
+  font-size: 3.8rem;
+  z-index: 11;
+  opacity: 0;
+  transform: translateX(-50%);
+  transition: top 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s;
+}
+
+.stage-diploma.show {
+  top: 42%;
+  opacity: 1;
+  animation: float-diploma 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes float-diploma {
+  0% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+  100% { transform: translateX(-50%) translateY(-12px) rotate(8deg); }
+}
+
+.stage-cat {
+  position: absolute;
+  bottom: 12px;
+  left: -400px;
+  display: flex;
+  gap: 24px;
+  z-index: 12;
+}
+
+.stage-cat.walk-across {
+  animation: cat-walk-across-anim 4.2s forwards cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@keyframes cat-walk-across-anim {
+  0% { left: -400px; }
+  100% { left: 45%; transform: translateX(-50%); }
+}
+
+.stage-single-cat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90px;
+  height: 110px;
+}
+
+.stage-single-cat svg {
+  width: 75px;
+  height: 75px;
+}
+
+.stage-cat.walk-across .stage-single-cat svg {
+  animation: cat-walk-bounce-anim 0.5s infinite alternate;
+}
+
+@keyframes cat-walk-bounce-anim {
+  0% { transform: translateY(0) rotate(-4deg); }
+  100% { transform: translateY(-10px) rotate(4deg); }
+}
+
+.stage-cat-name {
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: bold;
+  margin-top: 6px;
+  text-transform: capitalize;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Balloons */
+.stage-balloon {
+  position: absolute;
+  border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+  animation: float-balloon-up 9s linear forwards;
+  opacity: 0.9;
+  box-shadow: inset -6px -6px 12px rgba(0,0,0,0.2), 4px 4px 8px rgba(0,0,0,0.15);
+  z-index: 7;
+}
+
+.stage-balloon-string {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  width: 1.5px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+@keyframes float-balloon-up {
+  0% { bottom: -120px; transform: translateX(0) rotate(0deg); }
+  33% { transform: translateX(35px) rotate(4deg); }
+  66% { transform: translateX(-25px) rotate(-4deg); }
+  100% { bottom: 110%; transform: translateX(10px) rotate(0deg); }
+}
+
+/* Victory Overlay Glass Card */
+.victory-success-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  pointer-events: none;
+}
+
+.victory-success-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.victory-card {
+  max-width: 520px;
+  width: 90%;
+  padding: 35px;
+  text-align: center;
+  color: #fff;
+  border-radius: var(--radius-lg);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+}
+
+.victory-card h2 {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 2.2rem;
+  color: #f1c40f;
+  margin-bottom: 12px;
+  text-shadow: 0 0 10px rgba(241,196,15,0.4);
+}
+

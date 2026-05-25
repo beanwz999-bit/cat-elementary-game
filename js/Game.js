@@ -11,7 +11,8 @@ export const Game = {
   state: {
     players: [],         // array of { name, breed, color }
     unlockedGrade: 0,    // 0 = K, 1 = 1st, etc., 6 = Boss
-    completedPuzzles: {} // "gradeIndex": ["math", "reading", "science", "test"]
+    completedPuzzles: {}, // "gradeIndex": ["math", "reading", "science", "test"]
+    puzzlesStars: {}      // "gradeIndex": { "subject": stars }
   },
 
   activePlayerCount: 1,
@@ -50,10 +51,15 @@ export const Game = {
       PuzzleRunner.close();
     });
     
-    // Victory restart button
-    document.getElementById("victory-restart-btn").addEventListener("click", () => {
+    // Victory graduation buttons
+    document.getElementById("victory-menu-btn").addEventListener("click", () => {
       document.getElementById("victory-modal").classList.add("hidden");
       this.exitToMenu();
+    });
+    document.getElementById("victory-continue-btn").addEventListener("click", () => {
+      document.getElementById("victory-modal").classList.add("hidden");
+      this.startLoop(); // Restart RPG Map Engine
+      this.enterHallway(5); // Bring them back to the hallway at Grade 5 door position
     });
 
     // Graduation close button
@@ -222,6 +228,7 @@ export const Game = {
     this.state.players = [];
     this.state.unlockedGrade = 0;
     this.state.completedPuzzles = {};
+    this.state.puzzlesStars = {};
 
     for (let i = 0; i < this.activePlayerCount; i++) {
       const name = document.getElementById(`name-${i}`).value.trim() || `Player ${i + 1}`;
@@ -243,6 +250,9 @@ export const Game = {
     const saved = SaveSystem.load(this.activeProfileIdx);
     if (saved) {
       this.state = saved;
+      if (!this.state.puzzlesStars) {
+        this.state.puzzlesStars = {};
+      }
       this.enterWorld();
     }
   },
@@ -394,12 +404,6 @@ export const Game = {
   },
 
   enterHallway(gradeIdx = this.state.unlockedGrade) {
-    // Principal's office index is 6
-    if (this.state.unlockedGrade === 6 && gradeIdx === 6) {
-      this.startBossBattle();
-      return;
-    }
-    
     MapEngine.setView("hallway", Math.min(5, gradeIdx));
     this.updateHUD();
   },
@@ -543,9 +547,35 @@ export const Game = {
     });
   },
 
+  getPuzzleStars(gradeIdx, subject) {
+    if (!this.state.puzzlesStars) return 0;
+    if (!this.state.puzzlesStars[gradeIdx]) return 0;
+    return this.state.puzzlesStars[gradeIdx][subject] || 0;
+  },
+
   handleMinigameComplete(gradeIdx, subject, correct, total, passed) {
     if (passed === false) return; // defensive guard
     
+    // Calculate stars
+    const missed = total - correct;
+    let stars = 0;
+    if (missed === 0) stars = 3;
+    else if (missed === 1) stars = 2;
+    else if (missed === 2) stars = 1;
+    stars = Math.max(1, stars);
+
+    // Save stars if it's better than current score
+    if (!this.state.puzzlesStars) {
+      this.state.puzzlesStars = {};
+    }
+    if (!this.state.puzzlesStars[gradeIdx]) {
+      this.state.puzzlesStars[gradeIdx] = {};
+    }
+    const currentStars = this.state.puzzlesStars[gradeIdx][subject] || 0;
+    if (stars > currentStars) {
+      this.state.puzzlesStars[gradeIdx][subject] = stars;
+    }
+
     // Mark as solved
     if (!this.state.completedPuzzles[gradeIdx]) {
       this.state.completedPuzzles[gradeIdx] = [];
@@ -578,7 +608,9 @@ export const Game = {
     const gradModal = document.getElementById("grad-modal");
     const gradTitle = document.getElementById("grad-title");
     
-    gradTitle.innerText = `You graduated ${this.getGradeFullName(gradeIdx)}! 🎓`;
+    const testStars = this.getPuzzleStars(gradeIdx, "test");
+    const starStr = "⭐".repeat(testStars);
+    gradTitle.innerHTML = `You graduated ${this.getGradeFullName(gradeIdx)}! 🎓<br><span style="font-size: 1.5rem; color: #f1c40f; display: block; margin-top: 8px;">Exam Score: ${starStr}</span>`;
     gradModal.classList.remove("hidden");
 
     // Spawn falling confetti
@@ -709,30 +741,39 @@ export const Game = {
     }, 1250);
   },
 
-  /**
-   * Final Victory Screen Graduation Ceremony!
-   */
   winGame() {
     // Hide boss battle
     document.getElementById("boss-modal").classList.add("hidden");
     
-    // Clear save progress to allow starting fresh
-    if (this.activeProfileIdx) {
-      SaveSystem.clear(this.activeProfileIdx);
-    }
+    // Save progress instead of clearing it!
+    this.saveProgress();
 
     const victoryModal = document.getElementById("victory-modal");
     victoryModal.classList.remove("hidden");
 
-    // Render player cats in graduation ceremony
-    const victorCatsContainer = document.getElementById("victory-cats");
-    victorCatsContainer.innerHTML = "";
+    // Reset layout elements
+    const leftCurtain = victoryModal.querySelector(".curtain-left");
+    const rightCurtain = victoryModal.querySelector(".curtain-right");
+    const diploma = document.getElementById("stage-diploma");
+    const successOverlay = document.getElementById("victory-success-overlay");
+    const catContainer = document.getElementById("stage-player-cat");
+
+    leftCurtain.classList.remove("open");
+    rightCurtain.classList.remove("open");
+    diploma.classList.add("hidden");
+    diploma.classList.remove("show");
+    successOverlay.classList.add("hidden");
+    successOverlay.classList.remove("show");
+    catContainer.classList.remove("walk-across");
+
+    // Render player cats on stage
+    catContainer.innerHTML = "";
     this.state.players.forEach(p => {
       const wrapper = document.createElement("div");
-      wrapper.className = "graduating-cat-wrapper";
+      wrapper.className = "stage-single-cat";
       
       const avatar = document.createElement("div");
-      avatar.className = "graduating-cat-avatar";
+      avatar.style.position = "relative";
       avatar.innerHTML = CatRenderer.getSVG(p.breed, p.color);
       
       // Inject tiny graduation cap on top of SVG inside avatar (absolute overlay)
@@ -748,13 +789,90 @@ export const Game = {
       avatar.appendChild(cap);
       wrapper.appendChild(avatar);
       
-      const label = document.createElement("span");
-      label.className = "victory-cat-name";
+      const label = document.createElement("div");
+      label.className = "stage-cat-name";
       label.innerText = p.name;
       wrapper.appendChild(label);
       
-      victorCatsContainer.appendChild(wrapper);
+      catContainer.appendChild(wrapper);
     });
+
+    // Start Sequence
+    setTimeout(() => {
+      // 1. Open Curtains
+      leftCurtain.classList.add("open");
+      rightCurtain.classList.add("open");
+      
+      setTimeout(() => {
+        // 2. Walk cats across stage
+        catContainer.classList.add("walk-across");
+        
+        setTimeout(() => {
+          // 3. Drop diploma
+          diploma.classList.remove("hidden");
+          setTimeout(() => {
+            diploma.classList.add("show");
+          }, 50);
+          
+          // 4. Release balloons & confetti
+          this.spawnGradStageConfetti();
+          this.spawnGradStageBalloons();
+          
+          setTimeout(() => {
+            // 5. Fade in Congratulations card & buttons
+            successOverlay.classList.remove("hidden");
+            setTimeout(() => {
+              successOverlay.classList.add("show");
+            }, 50);
+          }, 2000);
+        }, 4200); // Wait for walk animation (4.2s)
+      }, 1000); // Wait for curtains to start opening
+    }, 500);
+  },
+
+  spawnGradStageConfetti() {
+    const container = document.getElementById("grad-stage-confetti");
+    container.innerHTML = "";
+    const colors = ["#ff3333", "#33ff33", "#3333ff", "#ffff33", "#ff33ff", "#33ffff", "#f39c12", "#9b59b6"];
+    for (let i = 0; i < 120; i++) {
+      const p = document.createElement("div");
+      p.className = "confetti-piece";
+      p.style.left = Math.random() * 100 + "%";
+      p.style.top = Math.random() * -30 - 10 + "px";
+      p.style.background = colors[Math.floor(Math.random() * colors.length)];
+      p.style.width = Math.random() * 8 + 4 + "px";
+      p.style.height = Math.random() * 12 + 6 + "px";
+      p.style.borderRadius = Math.random() > 0.5 ? "50%" : "0";
+      p.style.animationDelay = Math.random() * 3 + "s";
+      p.style.animationDuration = Math.random() * 2 + 1.5 + "s";
+      p.style.transform = `rotate(${Math.random() * 360}deg)`;
+      container.appendChild(p);
+    }
+  },
+
+  spawnGradStageBalloons() {
+    const container = document.getElementById("grad-stage-balloons");
+    container.innerHTML = "";
+    const colors = ["#ff5252", "#ffeb3b", "#2196f3", "#4caf50", "#e91e63", "#9c27b0", "#ff9800"];
+    for (let i = 0; i < 15; i++) {
+      const balloon = document.createElement("div");
+      balloon.className = "stage-balloon";
+      balloon.style.left = 10 + Math.random() * 80 + "%";
+      balloon.style.bottom = "-120px";
+      balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
+      
+      const size = Math.random() * 20 + 35; // 35px to 55px
+      balloon.style.width = size + "px";
+      balloon.style.height = size * 1.25 + "px";
+      balloon.style.animationDelay = Math.random() * 4 + "s";
+      balloon.style.animationDuration = Math.random() * 4 + 7 + "s"; // 7s to 11s
+      
+      const string = document.createElement("div");
+      string.className = "stage-balloon-string";
+      balloon.appendChild(string);
+      
+      container.appendChild(balloon);
+    }
   },
 
   /**

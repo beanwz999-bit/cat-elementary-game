@@ -239,18 +239,44 @@
       </div>
     </div>
 
-    <!-- 6. Graduation / Game Over Overlay -->
-    <div id="victory-modal" class="modal-overlay hidden">
-      <div class="victory-content glass animate-pop">
-        <div class="graduation-cap">🎓</div>
-        <h2>Happy Graduation!</h2>
-        <p>Congratulations, Class! You and your classmates have completed all grades from Kindergarten to 5th Grade, conquered the giant mechanical vacuum cleaner, and graduated from Cat Elementary with straight A's!</p>
-        
-        <div class="graduating-cats" id="victory-cats">
-          <!-- SVG cats with graduation caps -->
+    <!-- 6. Graduation Theater / Game Victory Overlay -->
+    <div id="victory-modal" class="modal-overlay hidden" style="background: #111; z-index: 2000; padding: 0;">
+      <div class="graduation-theater">
+        <!-- Stage Background -->
+        <div class="stage-backdrop">
+          <div class="backdrop-banner">CAT ELEMENTARY GRADUATION</div>
+          <!-- Confetti & Balloons Container -->
+          <div id="grad-stage-confetti" class="stage-particles"></div>
+          <div id="grad-stage-balloons" class="stage-particles"></div>
         </div>
-
-        <button id="victory-restart-btn" class="btn btn-success btn-lg">Back to Main Menu</button>
+        
+        <!-- Curtains -->
+        <div class="curtain curtain-left"></div>
+        <div class="curtain curtain-right"></div>
+        
+        <!-- Stage Floor -->
+        <div class="stage-floor">
+          <!-- Podium / Stand on the right -->
+          <div class="stage-podium">🎤</div>
+          
+          <!-- Diploma/Scroll that appears -->
+          <div id="stage-diploma" class="stage-diploma hidden">📜</div>
+          
+          <!-- Graduation Cat Character Container -->
+          <div id="stage-player-cat" class="stage-cat"></div>
+        </div>
+        
+        <!-- Congratulations message & options overlay -->
+        <div id="victory-success-overlay" class="victory-success-overlay hidden">
+          <div class="victory-card glass animate-pop">
+            <h2>🎓 Happy Graduation! 🎓</h2>
+            <p id="victory-congrats-msg" style="margin: 20px 0; font-size: 1.2rem; line-height: 1.6;">Congratulations! You graduated Cat Elementary School! 🐾</p>
+            <div class="victory-actions" style="display: flex; gap: 16px; justify-content: center; width: 100%;">
+              <button id="victory-menu-btn" class="btn btn-primary btn-lg" style="font-weight: bold; border-radius: 8px;">Main Menu 🚪</button>
+              <button id="victory-continue-btn" class="btn btn-success btn-lg" style="font-weight: bold; border-radius: 8px;">Continue Playing 🐾</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 

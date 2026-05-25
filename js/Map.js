@@ -571,7 +571,9 @@ export const MapEngine = {
           bubble.innerHTML = `📚 Solve all ${reqCount} subject minigames to unlock the Final Test!`;
         } else {
           const isSolved = this.game.isPuzzleCompleted(this.currentGradeIdx, this.activeHotspot.id);
-          const solvedTag = isSolved ? "✅ Replay" : "⭐ Play";
+          const stars = this.game.getPuzzleStars(this.currentGradeIdx, this.activeHotspot.id);
+          const starStr = stars > 0 ? " " + "⭐".repeat(stars) : "";
+          const solvedTag = isSolved ? `✅ Replay${starStr}` : "⭐ Play";
           bubble.innerHTML = `Press <span class="interact-key">Space</span> or <span class="interact-click">Tap</span> to play ${this.activeHotspot.name} ${solvedTag}`;
         }
       } else if (this.activeHotspot.type === "exit") {
@@ -1235,9 +1237,17 @@ export const MapEngine = {
 
       // Solved marker
       if (isSolved) {
-        ctx.fillStyle = "#2ecc71";
-        ctx.font = "bold 18px sans-serif";
-        ctx.fillText("✅", t.x + 22, t.y - 20);
+        const stars = this.game.getPuzzleStars(this.currentGradeIdx, t.id);
+        if (stars > 0) {
+          ctx.fillStyle = "#f1c40f";
+          ctx.font = "bold 16px sans-serif";
+          const starStr = "⭐".repeat(stars);
+          ctx.fillText(starStr, t.x, t.y - 25);
+        } else {
+          ctx.fillStyle = "#2ecc71";
+          ctx.font = "bold 18px sans-serif";
+          ctx.fillText("✅", t.x + 22, t.y - 20);
+        }
       } else {
         const floatY = t.y - 32 + Math.sin(Date.now() / 150) * 4;
         ctx.fillStyle = "#f1c40f";

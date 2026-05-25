@@ -488,7 +488,15 @@ export const PuzzleRunner = {
           feedbackBox.classList.remove("hidden");
           fbIcon.innerText = "😻";
           fbIcon.style.animation = "bounce 0.5s infinite alternate";
-          fbMsg.innerText = `Meow-vellous! You passed the subject! You got ${totalCorrect} out of ${game.questions.length} correct! 🎉`;
+          const missed = game.questions.length - totalCorrect;
+          let stars = 0;
+          if (missed === 0) stars = 3;
+          else if (missed === 1) stars = 2;
+          else if (missed === 2) stars = 1;
+          stars = Math.max(1, stars);
+          const starStr = "⭐".repeat(stars);
+
+          fbMsg.innerText = `Meow-vellous! You passed the subject! You got ${totalCorrect} out of ${game.questions.length} correct!\nRating: ${starStr} 🎉`;
 
           fbBtn.style.display = "inline-block";
           fbBtn.innerText = "Awesome! 🐾";

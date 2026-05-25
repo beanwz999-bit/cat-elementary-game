@@ -102,6 +102,18 @@ export const SaveSystem = {
         if (typeof val !== "string") return false;
       }
     }
+
+    if (state.puzzlesStars) {
+      if (typeof state.puzzlesStars !== "object" || Array.isArray(state.puzzlesStars)) return false;
+      for (const grade in state.puzzlesStars) {
+        const subObj = state.puzzlesStars[grade];
+        if (typeof subObj !== "object" || Array.isArray(subObj)) return false;
+        for (const sub in subObj) {
+          const rating = subObj[sub];
+          if (typeof rating !== "number" || !Number.isInteger(rating) || rating < 1 || rating > 3) return false;
+        }
+      }
+    }
     
     return true;
   }
