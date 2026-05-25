@@ -2163,10 +2163,10 @@ body, html {
 
 .stage-cat {
   position: absolute;
-  bottom: 12px;
-  left: -400px;
+  bottom: 20px;
+  left: -800px;
   display: flex;
-  gap: 24px;
+  gap: 32px;
   z-index: 12;
 }
 
@@ -2175,7 +2175,7 @@ body, html {
 }
 
 @keyframes cat-walk-across-anim {
-  0% { left: -400px; }
+  0% { left: -800px; }
   100% { left: 45%; transform: translateX(-50%); }
 }
 
@@ -2183,13 +2183,14 @@ body, html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 90px;
-  height: 110px;
+  width: 160px;
+  height: 200px;
 }
 
 .stage-single-cat svg {
-  width: 75px;
-  height: 75px;
+  width: 140px;
+  height: 140px;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.45));
 }
 
 .stage-cat.walk-across .stage-single-cat svg {
@@ -2198,20 +2199,68 @@ body, html {
 
 @keyframes cat-walk-bounce-anim {
   0% { transform: translateY(0) rotate(-4deg); }
-  100% { transform: translateY(-10px) rotate(4deg); }
+  100% { transform: translateY(-16px) rotate(4deg); }
 }
 
 .stage-cat-name {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.75);
   color: #fff;
-  padding: 3px 8px;
-  border-radius: 6px;
-  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 13px;
   font-weight: bold;
-  margin-top: 6px;
+  margin-top: 8px;
   text-transform: capitalize;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+}
+
+/* Cheering Crowd */
+.stage-crowd {
+  position: absolute;
+  bottom: -22px;
+  left: 5%;
+  width: 90%;
+  height: 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  z-index: 15;
+  pointer-events: none;
+}
+
+.crowd-cat {
+  width: 70px;
+  height: 80px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  filter: brightness(0.65) contrast(0.9);
+}
+
+.crowd-cat svg {
+  width: 60px;
+  height: 60px;
+}
+
+.crowd-cat:nth-child(even) {
+  animation: crowd-cheer-even 0.8s infinite alternate ease-in-out;
+}
+
+.crowd-cat:nth-child(odd) {
+  animation: crowd-cheer-odd 0.7s infinite alternate ease-in-out;
+}
+
+@keyframes crowd-cheer-even {
+  0% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(-16px) scaleY(0.92) rotate(-4deg); }
+  100% { transform: translateY(-28px) scaleY(1.08) rotate(4deg); }
+}
+
+@keyframes crowd-cheer-odd {
+  0% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(-14px) scaleY(1.04) rotate(4deg); }
+  100% { transform: translateY(-26px) scaleY(0.94) rotate(-4deg); }
 }
 
 /* Balloons */

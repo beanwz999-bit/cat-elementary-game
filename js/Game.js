@@ -800,10 +800,10 @@ export const Game = {
       const cap = document.createElement("span");
       cap.innerText = "🎓";
       cap.style.position = "absolute";
-      cap.style.top = "-24px";
+      cap.style.top = "-48px";
       cap.style.left = "50%";
       cap.style.transform = "translateX(-50%)";
-      cap.style.fontSize = "2.2rem";
+      cap.style.fontSize = "4.2rem";
       cap.style.zIndex = "5";
       
       avatar.appendChild(cap);
@@ -816,6 +816,24 @@ export const Game = {
       
       catContainer.appendChild(wrapper);
     });
+
+    // Render cheering crowd
+    const crowdContainer = document.getElementById("stage-crowd");
+    if (crowdContainer) {
+      crowdContainer.innerHTML = "";
+      const crowdBreeds = ["calico", "siamese", "tuxedo", "persian", "russianblue", "tabby"];
+      const collarColors = ["#e74c3c", "#3498db", "#2ecc71", "#f1c40f", "#9b59b6", "#e67e22"];
+      for (let i = 0; i < 7; i++) {
+        const crowdCat = document.createElement("div");
+        crowdCat.className = "crowd-cat";
+        const breed = crowdBreeds[i % crowdBreeds.length];
+        const color = collarColors[(i + 2) % collarColors.length];
+        crowdCat.innerHTML = CatRenderer.getSVG(breed, color);
+        crowdCat.style.animationDelay = `${Math.random() * 0.5}s`;
+        crowdCat.style.animationDuration = `${0.6 + Math.random() * 0.4}s`;
+        crowdContainer.appendChild(crowdCat);
+      }
+    }
 
     // Start Sequence
     setTimeout(() => {
