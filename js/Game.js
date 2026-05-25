@@ -60,8 +60,19 @@ export const Game = {
       PuzzleRunner.close();
     });
     
-    // Boss modal close button
+    // Boss modal close button (triggers confirmation popup)
     document.getElementById("boss-close-btn").addEventListener("click", () => {
+      document.getElementById("boss-confirm-modal").classList.remove("hidden");
+    });
+
+    // Boss exit confirmation cancel button (resumes the boss test)
+    document.getElementById("boss-confirm-cancel-btn").addEventListener("click", () => {
+      document.getElementById("boss-confirm-modal").classList.add("hidden");
+    });
+
+    // Boss exit confirmation OK button (hides both modals and exits back to hallway map)
+    document.getElementById("boss-confirm-ok-btn").addEventListener("click", () => {
+      document.getElementById("boss-confirm-modal").classList.add("hidden");
       document.getElementById("boss-modal").classList.add("hidden");
       this.startLoop();
     });
@@ -663,6 +674,7 @@ export const Game = {
 
     const modal = document.getElementById("boss-modal");
     modal.classList.remove("hidden");
+    document.getElementById("boss-confirm-modal").classList.add("hidden");
 
     // Render player cats in boss arena
     const catsContainer = document.getElementById("boss-player-cats");
