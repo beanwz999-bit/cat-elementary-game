@@ -1073,6 +1073,37 @@ export const MapEngine = {
     ctx.restore();
   },
 
+  drawOutlineStar(ctx, cx, cy, radius = 9) {
+    const spikes = 5;
+    const outerRadius = radius;
+    const innerRadius = radius * 0.4;
+    let rot = Math.PI / 2 * 3;
+    let x = cx;
+    let y = cy;
+    const step = Math.PI / spikes;
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - outerRadius);
+    for (let i = 0; i < spikes; i++) {
+      x = cx + Math.cos(rot) * outerRadius;
+      y = cy + Math.sin(rot) * outerRadius;
+      ctx.lineTo(x, y);
+      rot += step;
+
+      x = cx + Math.cos(rot) * innerRadius;
+      y = cy + Math.sin(rot) * innerRadius;
+      ctx.lineTo(x, y);
+      rot += step;
+    }
+    ctx.lineTo(cx, cy - outerRadius);
+    ctx.closePath();
+    ctx.lineWidth = 2.0;
+    ctx.strokeStyle = "#000000";
+    ctx.stroke();
+    ctx.restore();
+  },
+
   drawClassroomProps() {
     const ctx = this.ctx;
     
@@ -1250,9 +1281,7 @@ export const MapEngine = {
         }
       } else {
         const floatY = t.y - 32 + Math.sin(Date.now() / 150) * 4;
-        ctx.fillStyle = "#000000"; // Black outline star
-        ctx.font = "bold 20px sans-serif";
-        ctx.fillText("☆", t.x, floatY);
+        this.drawOutlineStar(ctx, t.x, floatY - 6, 9);
       }
     });
   },
