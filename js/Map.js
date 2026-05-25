@@ -1250,9 +1250,9 @@ export const MapEngine = {
         }
       } else {
         const floatY = t.y - 32 + Math.sin(Date.now() / 150) * 4;
-        ctx.fillStyle = "#f1c40f";
-        ctx.font = "18px sans-serif";
-        ctx.fillText("⭐", t.x, floatY);
+        ctx.fillStyle = "#000000"; // Black outline star
+        ctx.font = "bold 20px sans-serif";
+        ctx.fillText("☆", t.x, floatY);
       }
     });
   },
