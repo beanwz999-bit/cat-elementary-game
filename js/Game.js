@@ -653,6 +653,7 @@ export const Game = {
     this.bossHp = 100;
     this.bossQuestionIdx = 0;
     this.bossActivePlayerIdx = 0;
+    this.bossQuestionsPool = shuffleArray(BOSS_QUESTIONS);
 
     const modal = document.getElementById("boss-modal");
     modal.classList.remove("hidden");
@@ -684,7 +685,7 @@ export const Game = {
     document.getElementById("boss-turn-info").style.borderLeftColor = activePlayer.color;
 
     // Load boss question
-    const q = BOSS_QUESTIONS[this.bossQuestionIdx % BOSS_QUESTIONS.length];
+    const q = this.bossQuestionsPool[this.bossQuestionIdx % this.bossQuestionsPool.length];
     document.getElementById("boss-question-text").innerText = q.text;
 
     // Display options
@@ -713,7 +714,7 @@ export const Game = {
   },
 
   handleBossAnswer(selected) {
-    const q = BOSS_QUESTIONS[this.bossQuestionIdx % BOSS_QUESTIONS.length];
+    const q = this.bossQuestionsPool[this.bossQuestionIdx % this.bossQuestionsPool.length];
     const isCorrect = selected === q.correct;
 
     const feedbackPanel = document.getElementById("boss-feedback");
