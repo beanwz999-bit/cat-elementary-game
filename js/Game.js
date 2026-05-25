@@ -7,6 +7,15 @@ import { MapEngine } from "./Map.js";
 import { PuzzleRunner } from "./PuzzleRunner.js";
 import { BOSS_QUESTIONS } from "./questions.js";
 
+function shuffleArray(array) {
+  const arr = [...array];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
 export const Game = {
   state: {
     players: [],         // array of { name, breed, color }
@@ -683,7 +692,7 @@ export const Game = {
     optionsContainer.innerHTML = "";
     
     // Shuffle options to randomize their positions
-    const shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
+    const shuffledOptions = shuffleArray(q.options);
     shuffledOptions.forEach(opt => {
       const btn = document.createElement("button");
       btn.className = "answer-btn";
