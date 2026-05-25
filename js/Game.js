@@ -664,6 +664,11 @@ export const Game = {
   },
 
   renderBossRound() {
+    // Remove any focus from previous interactions to avoid ghost highlighting
+    if (document.activeElement && typeof document.activeElement.blur === "function") {
+      document.activeElement.blur();
+    }
+
     // Update active player turn
     const activePlayer = this.state.players[this.bossActivePlayerIdx];
     document.getElementById("boss-current-player").innerText = activePlayer.name;
@@ -676,11 +681,17 @@ export const Game = {
     // Display options
     const optionsContainer = document.getElementById("boss-answer-options");
     optionsContainer.innerHTML = "";
-    q.options.forEach(opt => {
+    
+    // Shuffle options to randomize their positions
+    const shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
+    shuffledOptions.forEach(opt => {
       const btn = document.createElement("button");
       btn.className = "answer-btn";
       btn.innerText = opt;
-      btn.addEventListener("click", () => this.handleBossAnswer(opt));
+      btn.addEventListener("click", () => {
+        btn.classList.add("selected-answer");
+        this.handleBossAnswer(opt);
+      });
       optionsContainer.appendChild(btn);
     });
 

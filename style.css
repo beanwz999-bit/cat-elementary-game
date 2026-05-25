@@ -858,6 +858,12 @@ body, html {
   transform: scale(0.98);
 }
 
+.answer-btn.selected-answer {
+  border-color: var(--color-primary) !important;
+  background-color: rgba(52, 152, 219, 0.1) !important;
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.5) !important;
+}
+
 /* Feedback Overlay within modal */
 .feedback-box {
   position: absolute;

@@ -106,6 +106,11 @@ export const PuzzleRunner = {
     const game = this.activeGame;
     const q = game.questions[game.currentIdx];
 
+    // Remove any focus from previous interactions to avoid ghost highlighting
+    if (document.activeElement && typeof document.activeElement.blur === "function") {
+      document.activeElement.blur();
+    }
+
     // 1. Update Turn info
     const activePlayer = game.players[game.activePlayerIdx];
     document.getElementById("current-turn-player-name").innerText = activePlayer.name;
@@ -182,11 +187,16 @@ export const PuzzleRunner = {
         }
       });
     } else {
-      q.options.forEach(opt => {
+      // Shuffle options to randomize their positions
+      const shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
+      shuffledOptions.forEach(opt => {
         const btn = document.createElement("button");
         btn.className = "answer-btn";
         btn.innerText = opt;
-        btn.addEventListener("click", () => this.handleAnswer(opt));
+        btn.addEventListener("click", () => {
+          btn.classList.add("selected-answer");
+          this.handleAnswer(opt);
+        });
         optionsContainer.appendChild(btn);
       });
     }
