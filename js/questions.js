@@ -297,16 +297,16 @@ export const QUESTIONS = {
       { text: "What is the perimeter of a 4x4 square?", options: ["8", "12", "16", "20"], correct: "16", visualType: "textOnly" }
     ],
     typing: [
-      { text: "Type the word before it hits the bottom!", correct: "technology", visualType: "typing", visualData: { word: "technology" } },
-      { text: "Type the word before it hits the bottom!", correct: "spacebar", visualType: "typing", visualData: { word: "spacebar" } },
-      { text: "Type the word before it hits the bottom!", correct: "microchip", visualType: "typing", visualData: { word: "microchip" } },
-      { text: "Type the word before it hits the bottom!", correct: "backspace", visualType: "typing", visualData: { word: "backspace" } },
-      { text: "Type the word before it hits the bottom!", correct: "chasing", visualType: "typing", visualData: { word: "chasing" } },
-      { text: "Type the word before it hits the bottom!", correct: "tailwhip", visualType: "typing", visualData: { word: "tailwhip" } },
-      { text: "Type the word before it hits the bottom!", correct: "software", visualType: "typing", visualData: { word: "software" } },
-      { text: "Type the word before it hits the bottom!", correct: "hardware", visualType: "typing", visualData: { word: "hardware" } },
-      { text: "Type the word before it hits the bottom!", correct: "alignment", visualType: "typing", visualData: { word: "alignment" } },
-      { text: "Type the word before it hits the bottom!", correct: "processor", visualType: "typing", visualData: { word: "processor" } }
+      { text: "Type the word before it hits the bottom!", correct: "mouse", visualType: "typing", visualData: { word: "mouse" } },
+      { text: "Type the word before it hits the bottom!", correct: "screen", visualType: "typing", visualData: { word: "screen" } },
+      { text: "Type the word before it hits the bottom!", correct: "click", visualType: "typing", visualData: { word: "click" } },
+      { text: "Type the word before it hits the bottom!", correct: "laptop", visualType: "typing", visualData: { word: "laptop" } },
+      { text: "Type the word before it hits the bottom!", correct: "button", visualType: "typing", visualData: { word: "button" } },
+      { text: "Type the word before it hits the bottom!", correct: "pixels", visualType: "typing", visualData: { word: "pixels" } },
+      { text: "Type the word before it hits the bottom!", correct: "scroll", visualType: "typing", visualData: { word: "scroll" } },
+      { text: "Type the word before it hits the bottom!", correct: "kitten", visualType: "typing", visualData: { word: "kitten" } },
+      { text: "Type the word before it hits the bottom!", correct: "gamepad", visualType: "typing", visualData: { word: "gamepad" } },
+      { text: "Type the word before it hits the bottom!", correct: "whisker", visualType: "typing", visualData: { word: "whisker" } }
     ]
   },
 
@@ -363,16 +363,16 @@ export const QUESTIONS = {
       { text: "What is a protagonist?", options: ["The villain", "The main hero", "The author", "A sidekick"], correct: "The main hero", visualType: "textOnly" }
     ],
     typing: [
-      { text: "Type the word before it hits the bottom!", correct: "photosynthesis", visualType: "typing", visualData: { word: "photosynthesis" } },
-      { text: "Type the word before it hits the bottom!", correct: "programming", visualType: "typing", visualData: { word: "programming" } },
-      { text: "Type the word before it hits the bottom!", correct: "cryptography", visualType: "typing", visualData: { word: "cryptography" } },
-      { text: "Type the word before it hits the bottom!", correct: "biodegradable", visualType: "typing", visualData: { word: "biodegradable" } },
-      { text: "Type the word before it hits the bottom!", correct: "cybersecurity", visualType: "typing", visualData: { word: "cybersecurity" } },
-      { text: "Type the word before it hits the bottom!", correct: "algorithm", visualType: "typing", visualData: { word: "algorithm" } },
-      { text: "Type the word before it hits the bottom!", correct: "javascript", visualType: "typing", visualData: { word: "javascript" } },
-      { text: "Type the word before it hits the bottom!", correct: "metamorphosis", visualType: "typing", visualData: { word: "metamorphosis" } },
-      { text: "Type the word before it hits the bottom!", correct: "ecosystem", visualType: "typing", visualData: { word: "ecosystem" } },
-      { text: "Type the word before it hits the bottom!", correct: "supercomputer", visualType: "typing", visualData: { word: "supercomputer" } }
+      { text: "Type the word before it hits the bottom!", correct: "website", visualType: "typing", visualData: { word: "website" } },
+      { text: "Type the word before it hits the bottom!", correct: "network", visualType: "typing", visualData: { word: "network" } },
+      { text: "Type the word before it hits the bottom!", correct: "pouncing", visualType: "typing", visualData: { word: "pouncing" } },
+      { text: "Type the word before it hits the bottom!", correct: "science", visualType: "typing", visualData: { word: "science" } },
+      { text: "Type the word before it hits the bottom!", correct: "history", visualType: "typing", visualData: { word: "history" } },
+      { text: "Type the word before it hits the bottom!", correct: "classroom", visualType: "typing", visualData: { word: "classroom" } },
+      { text: "Type the word before it hits the bottom!", correct: "teacher", visualType: "typing", visualData: { word: "teacher" } },
+      { text: "Type the word before it hits the bottom!", correct: "student", visualType: "typing", visualData: { word: "student" } },
+      { text: "Type the word before it hits the bottom!", correct: "diploma", visualType: "typing", visualData: { word: "diploma" } },
+      { text: "Type the word before it hits the bottom!", correct: "balloons", visualType: "typing", visualData: { word: "balloons" } }
     ]
   }
 };
